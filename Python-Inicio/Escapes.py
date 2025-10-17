@@ -7,7 +7,7 @@ comillas dobles internas. Cada ejemplo usa una técnica distinta:
 - Separar cadenas y dejar que `print` las concatene con comas.
 - Usar el parámetro `sep` de `print` para insertar saltos de línea.
 - Usar cadenas multilínea (triple comilla simple) para incluir
-  comillas dobles y caracteres especiales tal cual.
+- comillas dobles y caracteres especiales tal cual.
 - Construir cadenas concatenando multiplicaciones y literales.
 
 La salida muestra tres bloques con comillas: "Estoy", ""aprendiendo""
