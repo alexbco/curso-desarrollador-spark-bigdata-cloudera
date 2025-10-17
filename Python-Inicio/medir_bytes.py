@@ -13,3 +13,7 @@ print(sys.getsizeof("abcdefÑ"), end = " bytes\n")
 
 print(len("".encode("utf-8")))  # 0 bytes de contenido real
 print(len("á".encode("utf-8"))) # 2 bytes
+
+
+
+#probando probando
