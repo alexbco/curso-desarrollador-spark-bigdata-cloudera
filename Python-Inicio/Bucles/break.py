@@ -4,7 +4,7 @@ como la palabra de output secreta, en cuyo caso el mensaje "Has dejado el bucle 
 No imprimas ninguna de las palabras ingresadas por el usuario. Utiliza el concepto de ejecución condicional y la sentencia break."""
 
 while True:
-    palabra = str(input("Ingresa una palabra (o 'chupacabra' para salir): "))
+    palabra = input("Ingresa una palabra (o 'chupacabra' para salir): ")
     if palabra.lower() == "chupacabra":
         print("Has dejado el bucle con éxito.")
         break
