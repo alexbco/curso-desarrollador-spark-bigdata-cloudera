@@ -1,0 +1,126 @@
+-- ============================================================
+-- CREAR BASE DE DATOS
+-- ============================================================
+DROP DATABASE IF EXISTS training;
+CREATE DATABASE training;
+USE training;
+
+-- ============================================================
+-- TABLA DEPARTAMENTOS
+-- ============================================================
+CREATE TABLE dept (
+deptno INT PRIMARY KEY,
+dname VARCHAR(20),
+loc VARCHAR(20)
+);
+
+INSERT INTO dept VALUES
+(10, 'ACCOUNTING', 'NEW YORK'),
+(20, 'RESEARCH', 'DALLAS'),
+(30, 'SALES', 'CHICAGO'),
+(40, 'OPERATIONS', 'BOSTON');
+
+-- ============================================================
+-- TABLA EMPLEADOS
+-- ============================================================
+CREATE TABLE emp (
+empno INT PRIMARY KEY,
+ename VARCHAR(20),
+job VARCHAR(20),
+mgr INT NULL,
+hiredate DATE,
+sal DECIMAL(10,2),
+comm DECIMAL(10,2) NULL,
+deptno INT NULL,
+FOREIGN KEY (deptno) REFERENCES dept(deptno)
+);
+
+INSERT INTO emp VALUES
+(7839, 'KING', 'PRESIDENT', NULL, '1981-11-17', 5000, NULL, 10),
+(7566, 'JONES', 'MANAGER', 7839, '1981-04-02', 2975, NULL, 20),
+(7698, 'BLAKE', 'MANAGER', 7839, '1981-05-01', 2850, NULL, 30),
+(7782, 'CLARK', 'MANAGER', 7839, '1981-06-09', 2450, NULL, 10),
+(7788, 'SCOTT', 'ANALYST', 7566, '1987-07-13', 3000, NULL, 20),
+(7902, 'FORD', 'ANALYST', 7566, '1981-12-03', 3000, NULL, 20),
+(7844, 'TURNER', 'SALESMAN', 7698, '1981-09-08', 1500, 0.00, 30),
+(7900, 'JAMES', 'CLERK', 7698, '1981-12-03', 950, NULL, 30),
+(7654, 'MARTIN', 'SALESMAN', 7698, '1981-09-28', 1250, 1400, 30),
+(7499, 'ALLEN', 'SALESMAN', 7698, '1981-02-20', 1600, 300, 30),
+(7521, 'WARD', 'SALESMAN', 7698, '1981-02-22', 1250, 500, 30),
+(7934, 'MILLER', 'CLERK', 7782, '1982-01-23', 1300, NULL, 10);
+
+COMMIT;
+
+-- ============================================================
+-- TABLA SALGRADE (rango salarial)
+-- ============================================================
+CREATE TABLE salgrade (
+grade INT PRIMARY KEY,
+losal DECIMAL(10,2),
+hisal DECIMAL(10,2)
+);
+
+INSERT INTO salgrade VALUES
+(1, 700, 1200),
+(2, 1201, 1400),
+(3, 1401, 2000),
+(4, 2001, 3000),
+(5, 3001, 9999);
+
+COMMIT;
+
+-- ============================================================
+-- TABLA JOBHIST (histórico de empleos)
+-- ============================================================
+CREATE TABLE jobhist (
+empno INT,
+job VARCHAR(20),
+sal DECIMAL(10,2),
+comm DECIMAL(10,2),
+deptno INT,
+enddate DATE
+);
+
+INSERT INTO jobhist VALUES
+(7839, 'MANAGER', 4000, NULL, 10, '1975-10-10'),
+(7788, 'CLERK', 1000, NULL, 20, '1980-12-17'),
+(7902, 'CLERK', 800, NULL, 20, '1981-12-03'),
+(7844, 'CLERK', 900, NULL, 30, '1980-12-17'),
+(7654, 'SALESMAN', 1200, 1400, 30, '1981-09-28'),
+(7499, 'SALESMAN', 1600, 300, 30, '1981-02-20'),
+(7521, 'SALESMAN', 1250, 500, 30, '1981-02-22');
+
+COMMIT;
+
+-- ============================================================
+-- TABLAS DE CARTAS Y PALOS PARA CROSS JOIN
+-- ============================================================
+CREATE TABLE palos (
+id INT PRIMARY KEY,
+palo VARCHAR(10)
+);
+
+INSERT INTO palos VALUES
+(1, 'OROS'),
+(2, 'COPAS'),
+(3, 'ESPADAS'),
+(4, 'BASTOS');
+
+CREATE TABLE cartas (
+numero_carta INT PRIMARY KEY,
+carta VARCHAR(10)
+);
+
+INSERT INTO cartas VALUES
+(1, 'as'),
+(2, 'dos'),
+(3, 'tres'),
+(4, 'cuatro'),
+(5, 'cinco'),
+(6, 'seis'),
+(7, 'siete'),
+(8, 'sota'),
+(9, 'caballo'),
+(10, 'rey');
+
+COMMIT;
