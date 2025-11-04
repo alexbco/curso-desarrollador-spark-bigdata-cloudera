@@ -1,2 +1,2 @@
 # curso-desarrollador-spark-bigdata-cloudera
-Ejercicios y proyectos del curso de Google Cloud Data Engineer - CRN Getafe
+Ejercicios y proyectos del curso de Cloudera Data Engineer - CRN Getafe
