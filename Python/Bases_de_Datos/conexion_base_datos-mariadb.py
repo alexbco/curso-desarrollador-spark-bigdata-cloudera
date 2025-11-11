@@ -11,7 +11,7 @@
 # crear la base de datos si no existe (por si acaso)
 # CREATE DATABASE IF NOT EXISTS training CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
-# use training
+# USE training
 
 # CREATE TABLE IF NOT EXISTS empleados (
 #     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -20,7 +20,8 @@
 #     salario DECIMAL(10,2)
 # );
 
-# SHOW tables
+# -- Mostrar las tablas existentes (opcional)
+# SHOW TABLES;
 
 # INSERT INTO empleados (nombre, edad, salario) VALUES
 # ('Ana Torres', 28, 32000.00),
@@ -44,7 +45,6 @@
 # ('Nuria Delgado', 37, 46000.00),
 # ('Francisco López', 43, 53000.00);
 ###########################################################################################
-
 import mariadb
 #############################################
 # comprobar la versión de mariaDB
@@ -54,7 +54,7 @@ print(mariadb.__version__)
 # Configuración de la conexión a la base de datos
 
 config = {
-    "host": "10.2.5.19",
+    "host": "localhost",
     "user": "training",
     "password": "training",
     "database": "training",
@@ -165,28 +165,28 @@ config = {
 # try:
 #     conn = mariadb.connect(**config)
 #     cursor = conn.cursor()
-#
+
 #     # Obtener la estructura de la tabla
 #     cursor.execute("DESCRIBE emp")
-#
+
 #     # Definir el ancho de cada columna
 #     widths = [15, 20, 6, 8, 10, 15]
-#
+
 #     # Imprimir encabezados con ancho fijo
 #     headers = ["Nombre", "Tipo", "Nulo", "Clave", "Default", "Extra"]
 #     print("-" * sum(widths))
 #     print("".join(h.ljust(w) for h, w in zip(headers, widths)))
 #     print("-" * sum(widths))
-#
+
 #     # Imprimir cada fila con formato fijo
 #     for fila in cursor:
 #         print("".join(str(valor).ljust(w) for valor, w in zip(fila, widths)))
-#
+
 #     print("-" * sum(widths))
-#
+
 # except mariadb.Error as e:
 #     print(f"Error al obtener la estructura: {e}")
-#
+
 # finally:
 #     if 'conn' in locals():
 #         cursor.close()
@@ -260,24 +260,24 @@ config = {
 # recuperación de datos
 #############################################
 
-# try:
-#     conn = mariadb.connect(**config)
-#     cursor = conn.cursor()
+try:
+    conn = mariadb.connect(**config)
+    cursor = conn.cursor()
 
-#     cursor.execute("SELECT * FROM empleados")
-#     empleados = cursor.fetchall()
+    cursor.execute("SELECT * FROM empleados")
+    empleados = cursor.fetchall()
 
-#     print("ID  | Nombre          | Edad | Salario")
-#     print("---------------------------------------")
-#     for emp in empleados:
-#         print(f"{emp[0]:<3} | {emp[1]:<>15} | {emp[2]:>4} | {emp[3]:<7}")
+    print("ID  | Nombre          | Edad | Salario")
+    print("---------------------------------------")
+    for emp in empleados:
+        print(f"{emp[0]:<3} | {emp[1]:<>15} | {emp[2]:>4} | {emp[3]:<7}")
 
-# except mariadb.Error as e:
-#     print(f"Error: {e}")
+except mariadb.Error as e:
+    print(f"Error: {e}")
 
-# finally:
-#     cursor.close()
-#     conn.close()
+finally:
+    cursor.close()
+    conn.close()
 
 #############################################
 # actualización de datos
@@ -306,23 +306,23 @@ config = {
 # eliminación de datos
 #############################################
 
-try:
-    conn = mariadb.connect(**config)
-    cursor = conn.cursor()
+# try:
+#     conn = mariadb.connect(**config)
+#     cursor = conn.cursor()
 
-    cursor.execute("DELETE FROM empleados WHERE nombre = %s", 
-                    ("César Martín",))
+#     cursor.execute("DELETE FROM empleados WHERE nombre = %s", 
+#                     ("César Martín",))
 
-    if cursor.rowcount == 0:
-        raise mariadb.Error("El empleado no existe en la tabla")
+#     if cursor.rowcount == 0:
+#         raise mariadb.Error("El empleado no existe en la tabla")
 
-    conn.commit()
-    print("Empleado eliminado correctamente.")
+#     conn.commit()
+#     print("Empleado eliminado correctamente.")
 
-except mariadb.Error as e:
-    print(f"Error: {e}")
+# except mariadb.Error as e:
+#     print(f"Error: {e}")
 
-finally:
-    cursor.close()
-    conn.close()
+# finally:
+#     cursor.close()
+#     conn.close()
 
